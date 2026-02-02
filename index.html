@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Image Compressor</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{
+  font-family: Arial, sans-serif;
+  background:#f4f4f4;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+}
+.box{
+  background:#fff;
+  padding:20px;
+  width:100%;
+  max-width:400px;
+  border-radius:10px;
+  box-shadow:0 5px 20px rgba(0,0,0,.1);
+  text-align:center;
+}
+input[type=file]{
+  width:100%;
+  margin:15px 0;
+}
+button{
+  background:#007bff;
+  color:#fff;
+  border:none;
+  padding:10px;
+  width:100%;
+  border-radius:5px;
+  font-size:16px;
+}
+img{
+  max-width:100%;
+  margin-top:15px;
+}
+small{
+  display:block;
+  margin-top:10px;
+  color:#555;
+}
+</style>
+</head>
+<body>
+
+<div class="box">
+  <h2>Image Compressor</h2>
+  <input type="file" id="upload" accept="image/*">
+  <button onclick="compressImage()">Compress</button>
+  <img id="preview">
+  <small id="info"></small>
+</div>
+
+<script>
+function compressImage(){
+  const fileInput = document.getElementById("upload");
+  const img = document.getElementById("preview");
+  const info = document.getElementById("info");
+
+  if(!fileInput.files[0]){
+    alert("Please select an image");
+    return;
+  }
+
+  const file = fileInput.files[0];
+  const reader = new FileReader();
+
+  reader.onload = function(e){
+    img.src = e.target.result;
+
+    img.onload = function(){
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+
+      const scale = 0.6;
+      canvas.width = img.width * scale;
+      canvas.height = img.height * scale;
+
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+      canvas.toBlob(function(blob){
+        const url = URL.createObjectURL(blob);
+        info.innerHTML =
+          "Original: " + (file.size/1024).toFixed(1) + " KB<br>" +
+          "Compressed: " + (blob.size/1024).toFixed(1) + " KB<br>" +
+          "<a href='"+url+"' download='compressed.jpg'>Download</a>";
+      }, "image/jpeg", 0.7);
+    }
+  }
+  reader.readAsDataURL(file);
+}
+</script>
+
+</body>
+  </html>
