@@ -71,50 +71,42 @@
   </footer>
 
   <script>
-function compressImage() {
-  const input = document.getElementById("imageInput");
-  const status = document.getElementById("status");
+    function compressImage() {
+    const fileInput = document.getElementById("upload");
+    const file = fileInput.files[0];
 
-  if (!input.files.length) {
-    alert("Please select an image");
-    return;
-  }
+    if (!file) {
+        alert("Please select an image");
+        return;
+    }
 
-  const file = input.files[0];
-  const reader = new FileReader();
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
 
-  reader.onload = function (e) {
-    const img = new Image();
-    img.src = e.target.result;
+    reader.onload = function (event) {
+        const img = new Image();
+        img.src = event.target.result;
 
-    img.onload = function () {
-      const canvas = document.createElement("canvas");
-      const ctx = canvas.getContext("2d");
+        img.onload = function () {
+            const canvas = document.createElement("canvas");
+            const ctx = canvas.getContext("2d");
 
-      canvas.width = img.width;
-      canvas.height = img.height;
-      ctx.drawImage(img, 0, 0);
+            const scale = 0.6; // compression level
+            canvas.width = img.width * scale;
+            canvas.height = img.height * scale;
 
-      canvas.toBlob(
-        function (blob) {
-          const url = URL.createObjectURL(blob);
-          status.innerHTML = `
-            Image compressed successfully ✅<br>
-            <a href="${url}" download="compressed.jpg">Download Image</a>
-          `;
-        },
-        "image/jpeg",
-        0.6
-      );
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+            canvas.toBlob(function (blob) {
+                const url = URL.createObjectURL(blob);
+                const link = document.getElementById("download");
+                link.href = url;
+                link.download = "compressed.jpg";
+                link.style.display = "block";
+                link.innerText = "Download Compressed Image";
+            }, "image/jpeg", 0.6);
+        };
     };
-  };
-
-  reader.readAsDataURL(file);
 }
   </script>
     
-    }
-  </script>
-
-</body>
-</html>
