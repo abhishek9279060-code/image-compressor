@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head> 
+<head>
   <meta charset="UTF-8">
   <title>Image Compressor</title>
 
@@ -9,8 +9,9 @@
 
   <!-- Google AdSense -->
   <meta name="google-adsense-account" content="ca-pub-2205511579570420">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2205511579570420"
-     crossorigin="anonymous"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2205511579570420"
+    crossorigin="anonymous"></script>
+
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -19,124 +20,113 @@
       padding: 0;
       text-align: center;
     }
+
+    h1 {
+      margin-top: 30px;
+    }
+
+    .container {
+      background: #fff;
+      padding: 20px;
+      max-width: 400px;
+      margin: 30px auto;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    input, button {
+      margin: 10px 0;
+    }
+
+    img {
+      max-width: 100%;
+      margin-top: 10px;
+    }
+
+    footer {
+      margin-top: 40px;
+      padding: 15px;
+      background: #222;
+    }
+
+    footer a {
+      color: #fff;
+      margin: 0 8px;
+      text-decoration: none;
+      font-size: 14px;
+    }
   </style>
-</head>  
-<style>
-body {
-  font-family: Arial, sans-serif;
-  background: #f4f6f8;
-  margin: 0;
-  padding: 0;
-  text-align: center;
-}
-
-h1 {
-  margin-top: 30px;
-}
-
-.container {
-  background: #fff;
-  padding: 20px;
-  max-width: 400px;
-  margin: 30px auto;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-input, button {
-  margin: 10px 0;
-}
-
-img {
-  max-width: 100%;
-  margin-top: 10px;
-}
-
-footer {
-  margin-top: 40px;
-  padding: 15px;
-  background: #222;
-}
-
-footer a {
-  color: #fff;
-  margin: 0 8px;
-  text-decoration: none;
-  font-size: 14px;
-}
-</style>
 </head>
 
 <body>
 
-<h1>Image Compressor</h1>
+  <h1>Image Compressor</h1>
 
-<div class="container">
-  <input type="file" id="upload" accept="image/*"><br>
-  <button onclick="compressImage()">Compress Image</button>
-  <p id="status"></p>
+  <div class="container">
+    <input type="file" id="upload" accept="image/*"><br>
+    <button onclick="compressImage()">Compress Image</button>
+    <p id="status"></p>
 
-  <img id="preview" style="display:none;">
-  <br>
-  <a id="download" style="display:none;" download="compressed.jpg">
-    <button>Download Image</button>
-  </a>
-</div>
+    <img id="preview" style="display:none;">
+    <br>
+    <a id="download" style="display:none;" download="compressed.jpg">
+      <button>Download Image</button>
+    </a>
+  </div>
 
-<footer>
-  <a href="about.html">About</a>
-  <a href="contact.html">Contact</a>
-  <a href="privacy.html">Privacy Policy</a>
-  <a href="terms.html">Terms</a>
-</footer>
+  <footer>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms</a>
+  </footer>
 
-<script>
-function compressImage() {
-  const fileInput = document.getElementById("upload");
-  const preview = document.getElementById("preview");
-  const download = document.getElementById("download");
-  const status = document.getElementById("status");
+  <script>
+    function compressImage() {
+      const fileInput = document.getElementById("upload");
+      const preview = document.getElementById("preview");
+      const download = document.getElementById("download");
+      const status = document.getElementById("status");
 
-  if (!fileInput.files[0]) {
-    alert("Please select an image");
-    return;
-  }
+      if (!fileInput.files.length) {
+        alert("Please select an image first.");
+        return;
+      }
 
-  const file = fileInput.files[0];
-  const reader = new FileReader();
+      const file = fileInput.files[0];
+      const reader = new FileReader();
 
-  reader.onload = function(e) {
-    const img = new Image();
-    img.src = e.target.result;
+      reader.onload = function(event) {
+        const img = new Image();
+        img.src = event.target.result;
 
-    img.onload = function() {
-      const canvas = document.createElement("canvas");
-      const ctx = canvas.getContext("2d");
+        img.onload = function() {
+          const canvas = document.createElement("canvas");
+          const ctx = canvas.getContext("2d");
 
-      canvas.width = img.width * 0.6;
-      canvas.height = img.height * 0.6;
+          const maxWidth = 800;
+          const scaleSize = maxWidth / img.width;
 
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          canvas.width = maxWidth;
+          canvas.height = img.height * scaleSize;
 
-      const compressedData = canvas.toDataURL("image/jpeg", 0.6);
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-      preview.src = compressedData;
-      preview.style.display = "block";
+          const compressedData = canvas.toDataURL("image/jpeg", 0.7);
 
-      download.href = compressedData;
-      download.style.display = "inline-block";
+          preview.src = compressedData;
+          preview.style.display = "block";
 
-      status.innerText = "Image compressed successfully ✅";
-    };
-  };
+          download.href = compressedData;
+          download.style.display = "inline";
 
-  reader.readAsDataURL(file);
-}
-</script>
-Image Compression Guide
-Image compression is the process of reducing image file size without affecting visual quality. It is essential for fast websites and better SEO. Compressed images load faster and improve user experience.
-There are two types of image compression: lossy and lossless. Lossy compression reduces file size by removing some data, while lossless compression keeps quality intact.
-Using image compression helps reduce page load time, save bandwidth, and improve search engine rankings. Every modern website should use optimized images.
+          status.innerText = "Image compressed successfully!";
+        };
+      };
+
+      reader.readAsDataURL(file);
+    }
+  </script>
+
 </body>
-    </html>
-      
+</html>
