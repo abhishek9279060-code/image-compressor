@@ -1,307 +1,183 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Image Compressor</title>
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Free online image compressor tool">
-
-  <!-- Google AdSense -->
-  <meta name="google-adsense-account" content="ca-pub-2205511579570420">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2205511579570420"
-    crossorigin="anonymous"></script>
-
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f6f8;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-    }
-
-    h1 {
-      margin-top: 30px;
-    }
-
-    .container {
-      background: #fff;
-      padding: 20px;
-      max-width: 400px;
-      margin: 30px auto;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-
-    input, button {
-      margin: 10px 0;
-    }
-
-    img {
-      max-width: 100%;
-      margin-top: 10px;
-    }
-
-    footer {
-      margin-top: 40px;
-      padding: 15px;
-      background: #222;
-    }
-
-    footer a {
-      color: #fff;
-      margin: 0 8px;
-      text-decoration: none;
-      font-size: 14px;
-    }
-  </style>
-</head>
-
-<body>
-
-  <h1>Image Compressor</h1>
-
-  <div class="container">
-    <input type="file" id="upload" accept="image/*"><br>
-    <button onclick="compressImage()">Compress Image</button>
-    <p id="status"></p>
-
-    <img id="preview" style="display:none;">
-    <br>
-    <a id="download" style="display:none;" download="compressed.jpg">
-      <button>Download Image</button>
-    </a>
-  </div>
-  
-<footer>to
-<a href="about.html">About</a>
-<a href="contact.html">Contact</a>
-<a href="privacy.html">Privacy Policy</a>
-<a href="terms.html">Terms</a>
-</footer>
-  <script>
-    function compressImage() {
-      const fileInput = document.getElementById("upload");
-      const preview = document.getElementById("preview");
-      const download = document.getElementById("download");
-      const status = document.getElementById("status");
-
-      if (!fileInput.files.length) {
-        alert("Please select an image first.");
-        return;
-      }
-
-      const file = fileInput.files[0];
-      const reader = new FileReader();
-
-      reader.onload = function(event) {
-        const img = new Image();
-        img.src = event.target.result;
-
-        img.onload = function() {
- dj
-</div>
-
-<script>
-async function convertPDF() {
-  const file = document.getElementById("pdfInput").files[0];
-  if (!file) {
-    alert("Please select a PDF file.");
-    return;
-  }
-
-  const fileReader = new FileReader();
-  fileReader.onload = async function() {
-    const typedarray = new Uint8Array(this.result);
-
-    const pdf = await pdfjsLib.getDocument(typedarray).promise;
-    const page = await pdf.getPage(1);
-
-    const scale = 1.5;
-    const viewport = page.getViewport({ scale: scale });
-
-    const canvas = document.getElementById("canvas");
-    const context = canvas.getContext("2d");
-    canvas.height = viewport.height;
-    canvas.width = viewport.width;
-
-    await page.render({
-      canvasContext: context,
-      viewport: viewport
-    }).promise;
-
-    const imgData = canvas.toDataURL("image/jpeg");
-    const download = document.getElementById("download");
-    download.href = imgData;
-    download.style.display = "inline";
-  };
-
-  fileReader.readAsArrayBuffer(file);
-}
-</script>
-
-</body>
-</html>
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Image Resizer Tool</title>
+<title>Professional Image Tools</title>
+
+<!-- Adsense Code -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"crossorigin="anonymous"></script>
+<meta name="google-adsense-account" content="ca-pub-XXXXXXXXXXXX">
 
 <style>
 body{
-  font-family: Arial, sans-serif;
-  text-align:center;
-  padding:40px;
-  background:#f4f4f4;
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:linear-gradient(135deg,#4e73df,#1cc88a);
+    color:#333;
+    text-align:center;
 }
-.container{
-  background:#fff;
-  padding:30px;
-  border-radius:10px;
-  box-shadow:0 0 10px rgba(0,0,0,0.1);
-  max-width:450px;
-  margin:auto;
+
+header{
+    padding:60px 20px;
+    color:white;
 }
-input{
-  margin:8px;
-  padding:8px;
+
+.section{
+    background:#fff;
+    margin:20px auto;
+    padding:30px;
+    max-width:500px;
+    border-radius:12px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.1);
 }
+
 button{
-  padding:10px 20px;
-  background:#007bff;
-  color:white;
-  border:none;
-  border-radius:5px;
-  cursor:pointer;
+    padding:10px 20px;
+    border:none;
+    border-radius:25px;
+    background:#4e73df;
+    color:white;
+    cursor:pointer;
+    margin-top:10px;
 }
+
 button:hover{
-  background:#0056b3;
+    background:#2e59d9;
 }
-canvas{
-  margin-top:20px;
-  max-width:100%;
+
+input{
+    padding:8px;
+    margin:5px;
+}
+
+footer{
+    background:#111;
+    padding:20px;
+    margin-top:40px;
+}
+
+footer a{
+    color:#fff;
+    margin:0 10px;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.note{
+    padding:30px;
+    max-width:800px;
+    margin:auto;
+    text-align:justify;
+    line-height:1.6;
 }
 </style>
 </head>
+
 <body>
 
-<div class="container">
-<h2>Image Resizer Tool</h2>
+<header>
+<h1>Professional Image Tools</h1>
+<p>Compress and Resize Images Easily</p>
+<button onclick="document.getElementById('tools').scrollIntoView()">Continue</button>
+</header>
 
-<input type="file" id="imageInput" accept="image/*"><br>
+<div id="tools">
 
-<input type="number" id="width" placeholder="Width (px)">
-<input type="number" id="height" placeholder="Height (px)"><br>
-
-<button onclick="resizeImage()">Resize Image</button>
-
-<br>
-<canvas id="canvas"></canvas>
-<br>
-
-<a id="download" style="display:none;" download="resized-image.jpg">
-<button>Download Image</button>
+<div class="section">
+<h2>Image Compressor</h2>
+<input type="file" id="compressUpload" accept="image/*"><br>
+<button onclick="compressImage()">Compress Image</button><br><br>
+<a id="compressDownload" style="display:none;" download="compressed.jpg">
+<button>Download</button>
 </a>
+</div>
+
+<div class="section">
+<h2>Image Resizer</h2>
+<input type="file" id="resizeUpload" accept="image/*"><br>
+<input type="number" id="width" placeholder="Width">
+<input type="number" id="height" placeholder="Height"><br>
+<button onclick="resizeImage()">Resize Image</button><br><br>
+<a id="resizeDownload" style="display:none;" download="resized.jpg">
+<button>Download</button>
+</a>
+</div>
 
 </div>
 
+<div class="note">
+<h2>Important Note</h2>
+<p>
+Welcome to Professional Image Tools, your simple and reliable solution for compressing and resizing images online without installing any software. Our platform is designed to help users quickly reduce image file sizes and adjust dimensions while maintaining acceptable quality. This tool works directly inside your browser, which means your images are processed on your own device and are not uploaded to any external server. This ensures better privacy, faster performance, and improved security for all users.
+
+Image compression helps reduce file size, making it easier to upload images to websites, send through email, or share on social media platforms. Smaller file sizes also improve website loading speed, which is important for user experience and search engine optimization. The resize feature allows you to set custom width and height values so your images perfectly fit website banners, blog posts, profile pictures, or digital projects.
+
+Please note that extreme compression may slightly reduce image quality depending on the selected settings. We recommend testing different sizes to find the right balance between quality and file size. Always keep a backup of your original image before compressing or resizing. This tool is provided for general use purposes only, and users are responsible for ensuring that their images do not violate copyright or content guidelines.
+
+By using this website, you agree to our privacy policy and terms of service. We may display advertisements through Google AdSense to support the maintenance and development of this platform. These ads help us keep the tool free and accessible for everyone. We do not store or track personal image data during processing. Thank you for using Professional Image Tools and supporting our platform.
+</p>
+</div>
+
+<footer>
+<a href="#">About</a>
+<a href="#">Contact</a>
+<a href="#">Privacy Policy</a>
+<a href="#">Terms</a>
+</footer>
+
 <script>
-function resizeImage() {
-  const file = document.getElementById("imageInput").files[0];
-  const width = document.getElementById("width").value;
-  const height = document.getElementById("height").value;
+function compressImage() {
+    const file = document.getElementById("compressUpload").files[0];
+    if (!file) return alert("Select image first");
 
-  if (!file || !width || !height) {
-    alert("Please select image and enter width & height.");
-    return;
-  }
-
-  const reader = new FileReader();
-  reader.readAsDataURL(file);
-
-  reader.onload = function(event) {
-    const img = new Image();
-    img.src = event.target.result;
-
-    img.onload = function() {
-      const canvas = document.getElementById("canvas");
-      const ctx = canvas.getContext("2d");
-
-      canvas.width = width;
-      canvas.height = height;
-
-      ctx.drawImage(img, 0, 0, width, height);
-
-      const resizedImage = canvas.toDataURL("image/jpeg", 0.9);
-
-      const download = document.getElementById("download");
-      download.href = resizedImage;
-      download.style.display = "inline";
-    };
-  };
+    const reader = new FileReader();
+    reader.onload = function(e){
+        const img = new Image();
+        img.src = e.target.result;
+        img.onload = function(){
+            const canvas = document.createElement("canvas");
+            const ctx = canvas.getContext("2d");
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.drawImage(img,0,0);
+            canvas.toBlob(function(blob){
+                const url = URL.createObjectURL(blob);
+                const link = document.getElementById("compressDownload");
+                link.href = url;
+                link.style.display="inline";
+            },"image/jpeg",0.6);
+        }
+    }
+    reader.readAsDataURL(file);
 }
-</script>
 
-</body>
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Image Resizer Tool</title>
+function resizeImage(){
+    const file = document.getElementById("resizeUpload").files[0];
+    const width = document.getElementById("width").value;
+    const height = document.getElementById("height").value;
 
-<style>
-body{
-  font-family: Arial, sans-serif;
-  text-align:center;
-  padding:40px;
-  background:#f4f4f4;
-}
-.container{
-  background:#fff;
-  padding:30px;
-  border-radius:10px;
-  box-shadow:0 0 10px rgba(0,0,0,0.1);
-  max-width:450px;
-  margin:auto;
-}
-input{
-  margin:8px;
-  padding:8px;
-}
-button{
-  padding:10px 20px;
-  background:#007bff;
-  color:white;
-  border:none;
-  border-radius:5px;
-  cursor:pointer;
-}
-button:hover{
-  background:#0056b3;
-}
-canvas{
-  margin-top:20px;
-  max-width:100%;
+    if(!file) return alert("Select image first");
 
+    const reader = new FileReader();
+    reader.onload = function(e){
+        const img = new Image();
+        img.src = e.target.result;
+        img.onload = function(){
+            const canvas = document.createElement("canvas");
+            const ctx = canvas.getContext("2d");
+            canvas.width = width;
+            canvas.height = height;
+            ctx.drawImage(img,0,0,width,height);
+            const url = canvas.toDataURL("image/jpeg");
+            const link = document.getElementById("resizeDownload");
+            link.href = url;
+            link.style.display="inline";
+        }
+    }
+    reader.readAsDataURL(file);
+}
 </script>
 
 </body>
 </html>
-
-<div style="max-width:800px;margin:40px auto;padding:20px;background:#fff;border-radius:8px;box-shadow:0 0 8px rgba(0,0,0,0.1);font-size:14px;line-height:1.6;">
-<h3>Important Note</h3>
-<p>
-All tools available on this website work directly in your browser.
-We do not upload, store, or share your files on any server.
-Your privacy and security are our top priority.
-</p>
-
-<p>
-This website provides free online tools for image and PDF processing.
-If you find our tools helpful, please share this website with your friends.
-</p>
-</div>
